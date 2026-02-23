@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ÖdevDağıtım.API.Models;
 using System.Reflection;
 
-namespace ÖdevDağıtım.API.Data
+namespace ÖdevDağıtım.API.Data  
 {
     public class AppDbContext : IdentityDbContext<AppUser, AppRole, string>
     {
