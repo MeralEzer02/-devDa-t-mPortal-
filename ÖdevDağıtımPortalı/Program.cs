@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ÖdevDaðýtým.API.Data;
 using ÖdevDaðýtým.API.Models;
+using ÖdevDaðýtým.API.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,12 +23,23 @@ builder.Services.AddIdentity<AppUser, AppRole>(options =>
 })
 .AddEntityFrameworkStores<AppDbContext>();
 
+builder.Services.AddScoped<DataSeeder>();
+
+// Generic Repository Kaydý
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+// Özel Repository Kayýtlarý
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<IAssignmentRepository, AssignmentRepository>();
+builder.Services.AddScoped<ISubmissionRepository, SubmissionRepository>();
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -39,5 +51,11 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<DataSeeder>();
+    await seeder.SeedAsync();
+}
 
 app.Run();

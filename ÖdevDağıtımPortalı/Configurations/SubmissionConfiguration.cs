@@ -17,6 +17,9 @@ namespace ÖdevDağıtım.API.Configurations
                    .WithMany(u => u.Submissions)
                    .HasForeignKey(s => s.StudentId)
                    .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasIndex(x => x.StudentId);
+            builder.HasIndex(x => x.AssignmentId);
         }
     }
 }

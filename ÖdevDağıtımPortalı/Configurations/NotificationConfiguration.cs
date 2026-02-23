@@ -4,11 +4,11 @@ using ÖdevDağıtım.API.Models;
 
 namespace ÖdevDağıtım.API.Configurations
 {
-    public class AssignmentConfiguration : IEntityTypeConfiguration<Assignment>
+    public class NotificationConfiguration : IEntityTypeConfiguration<Notification>
     {
-        public void Configure(EntityTypeBuilder<Assignment> builder)
+        public void Configure(EntityTypeBuilder<Notification> builder)
         {
-            builder.HasIndex(x => x.CourseId);
+            builder.HasIndex(x => x.UserId);
         }
     }
 }
