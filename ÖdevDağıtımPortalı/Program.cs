@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using ÖdevDaðýtým.API.Data;
 using ÖdevDaðýtým.API.Models;
 using ÖdevDaðýtým.API.Repositories;
@@ -34,6 +35,12 @@ builder.Services.AddScoped<IAssignmentRepository, AssignmentRepository>();
 builder.Services.AddScoped<ISubmissionRepository, SubmissionRepository>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+// AutoMapper Kaydý (En Hýzlý ve Garantili Yöntem)
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<ÖdevDaðýtým.API.Helpers.MappingProfile>();
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
