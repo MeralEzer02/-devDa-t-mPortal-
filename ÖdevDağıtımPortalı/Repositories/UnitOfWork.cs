@@ -6,7 +6,7 @@ namespace ÖdevDağıtım.API.Repositories
     {
         private readonly AppDbContext _context;
 
-        public ICourseRepository Courses { get; }
+        public ICourseRepository Courses { get; }  
         public IAssignmentRepository Assignments { get; }
         public ISubmissionRepository Submissions { get; }
 
