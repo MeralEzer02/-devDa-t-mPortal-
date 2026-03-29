@@ -105,7 +105,7 @@ namespace ÖdevDağıtım.API.Services
             catch (Exception)
             {
             }
-        }
+        }  
 
         public async Task AssignTeacherAsync(int courseId, string teacherId)
         {
